@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557599257153",
+    "project_id": "kotlinchatapp-group24",
+    "storage_bucket": "kotlinchatapp-group24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557599257153:android:b8190e5c96ac0c92aeccc0",
+        "android_client_info": {
+          "package_name": "com.group24.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557599257153-ssgn131ddolifgull3ao3klc8oo9kn33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrKgkazRskv8VhK3P3EVYl2Cg3bnHXAZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557599257153-ssgn131ddolifgull3ao3klc8oo9kn33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
