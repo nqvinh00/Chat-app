@@ -12,5 +12,6 @@
     <string name="todo">TODO</string>
     <string name="sign_out">Sign Out</string>
     <string name="new_message">New Message</string>
+    <string name="username_new_message">Username</string>
     <!-- Strings used for fragments for navigation -->
 </resources>
