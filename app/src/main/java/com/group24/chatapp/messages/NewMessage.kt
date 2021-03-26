@@ -1,5 +1,6 @@
 package com.group24.chatapp.messages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ class NewMessage : AppCompatActivity() {
         const val NEW_MESSAGE_TAG = "NewMessage"
         const val USERS_STORAGE_PATH = "/users"
         const val ACTION_BAR_TITLE = "Select User"
+        val USER_KEY = "USER_KEY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,17 @@ class NewMessage : AppCompatActivity() {
                     if (user != null) {
                         adapter.add(UserObject(user))
                     }
+                }
+
+                adapter.setOnItemClickListener { item, view ->
+                    val userItem = item as UserObject
+
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+//                    intent.putExtra(USER_KEY, userItem.user.username)
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
+
+                    finish()
                 }
 
                 new_message_recycler_view.adapter = adapter

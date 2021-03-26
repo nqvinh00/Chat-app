@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
 }
+
+androidExtensions {
+    experimental = true
+}
+
 apply plugin: 'com.google.gms.google-services'
 
 android {
