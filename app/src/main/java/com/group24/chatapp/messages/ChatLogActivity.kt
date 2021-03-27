@@ -9,21 +9,18 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.group24.chatapp.R
-import com.group24.chatapp.messages.ChatLogActivity.Companion.TAG
 import com.group24.chatapp.models.ChatMessage
 import com.group24.chatapp.models.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
-import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.chat_from_row.view.textView
-import kotlinx.android.synthetic.main.chat_to_row.view.*
 
 class ChatLogActivity : AppCompatActivity() {
 
     companion object {
-        val TAG = "ChatLog"
+        const val CHAT_LOG_TAG = "ChatLog"
     }
 
     val adapter = GroupAdapter<GroupieViewHolder>()
@@ -37,11 +34,10 @@ class ChatLogActivity : AppCompatActivity() {
         val user = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
         supportActionBar?.title = user?.username
 
-//        setupDummyData()
         listenForMessages()
 
         send_button_chat_log.setOnClickListener {
-            Log.d(TAG, "attend to send message.......")
+            Log.d(CHAT_LOG_TAG, "attend to send message.......")
             performSendMessage()
         }
     }
@@ -53,7 +49,7 @@ class ChatLogActivity : AppCompatActivity() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if (chatMessage != null) {
-                    Log.d(TAG, chatMessage!!.text)
+                    Log.d(CHAT_LOG_TAG, chatMessage.text)
 
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
                         adapter.add(ChatFromItem(chatMessage.text))
@@ -91,25 +87,14 @@ class ChatLogActivity : AppCompatActivity() {
 
         if (fromId == null) return
 
-        val reference = FirebaseDatabase.getInstance().getReference("/message").push()
+        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
 
         val chatMessage =
             ChatMessage(reference.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
             //ChatMessage(text)
         reference.setValue(chatMessage).addOnSuccessListener {
-            Log.d(TAG, "saved our chat mess ${reference.key}")
+            Log.d(CHAT_LOG_TAG, "saved our chat mess ${reference.key}")
         }
-    }
-
-    private fun setupDummyData() {
-        val adapter = GroupAdapter<GroupieViewHolder>()
-
-        adapter.add(ChatFromItem("aaaaaaaaaaaa"))
-        adapter.add(ChatToItem("TO MESSS\nTOMESSS"))
-        adapter.add(ChatFromItem("aaaaaaaaaaaa"))
-        adapter.add(ChatToItem("TO MESSS\nTOMESSS"))
-
-        recyclerview_chat_log.adapter = adapter
     }
 }
 

@@ -20,7 +20,7 @@ class NewMessage : AppCompatActivity() {
         const val NEW_MESSAGE_TAG = "NewMessage"
         const val USERS_STORAGE_PATH = "/users"
         const val ACTION_BAR_TITLE = "Select User"
-        val USER_KEY = "USER_KEY"
+        const val USER_KEY = "USER_KEY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
