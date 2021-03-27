@@ -14,5 +14,6 @@
     <string name="new_message">New Message</string>
     <string name="username_new_message">Username</string>
     <string name="SendChat">Send</string>
+    <string name="enter_message">Enter Message</string>
     <!-- Strings used for fragments for navigation -->
 </resources>

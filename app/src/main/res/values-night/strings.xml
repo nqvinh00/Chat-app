@@ -12,4 +12,5 @@
     <string name="todo">TODO</string>
     <string name="sign_out">Sign Out</string>
     <string name="new_message">New Message</string>
+    <string name="enter_message">Enter Message</string>
 </resources>
