@@ -1,6 +1,7 @@
-package com.group24.chatapp.models
+package com.group24.chatapp.models.user
 
 import com.group24.chatapp.R
+import com.group24.chatapp.models.user.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.GroupieViewHolder

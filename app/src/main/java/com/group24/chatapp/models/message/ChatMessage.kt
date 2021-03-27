@@ -1,4 +1,4 @@
-package com.group24.chatapp.models
+package com.group24.chatapp.models.message
 
 class ChatMessage(
     val id: String,
@@ -9,5 +9,3 @@ class ChatMessage(
 ) {
     constructor() : this("", "", "", "", -1)
 }
-
-//class ChatMessage(val text: String)

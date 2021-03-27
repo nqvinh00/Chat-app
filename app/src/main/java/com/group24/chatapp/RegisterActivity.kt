@@ -6,14 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
-import android.view.MenuItem
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.group24.chatapp.messages.LatestMessages
-import com.group24.chatapp.models.User
+import com.group24.chatapp.models.user.User
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
@@ -22,6 +21,8 @@ class RegisterActivity : AppCompatActivity() {
     
     companion object {
         const val REGISTER_TAG = "RegisterActivity"
+        const val IMAGES_STORAGE_PATH = "/images"
+        const val USERS_PATH = "/users"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun uploadImageToFirebase() {
         if (selectedPhotoURI == null ) return
         val filename = UUID.randomUUID().toString()
-        val reference = FirebaseStorage.getInstance().getReference("/images/$filename")
+        val reference = FirebaseStorage.getInstance().getReference("$IMAGES_STORAGE_PATH/$filename")
         reference.putFile(selectedPhotoURI!!)
                 .addOnSuccessListener { it ->
                     Log.d(REGISTER_TAG, "Upload avatar to firebase successfully: ${it.metadata?.path}")
@@ -94,7 +95,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveUserToDatabase(profileImageURL: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val reference = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val reference = FirebaseDatabase.getInstance().getReference("/$USERS_PATH/$uid")
         val user = User(uid, username_register.text.toString(), profileImageURL)
         reference.setValue(user)
                 .addOnSuccessListener {

@@ -8,7 +8,7 @@
     android:background="@android:color/white">
 
     <EditText
-        android:id="@+id/edittext_chat_log"
+        android:id="@+id/message_input"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -19,12 +19,12 @@
         android:hint="@string/enter_message"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send_button_chat_log"
+        app:layout_constraintEnd_toStartOf="@+id/send_message_button"
         app:layout_constraintStart_toStartOf="parent"
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/send_button_chat_log"
+        android:id="@+id/send_message_button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
@@ -37,13 +37,13 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_chat_log"
+        android:id="@+id/message_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:background="@color/white"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/edittext_chat_log"
+        app:layout_constraintBottom_toTopOf="@+id/message_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

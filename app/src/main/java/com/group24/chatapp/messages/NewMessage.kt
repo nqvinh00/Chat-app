@@ -9,8 +9,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.group24.chatapp.R
-import com.group24.chatapp.models.User
-import com.group24.chatapp.models.UserObject
+import com.group24.chatapp.models.user.User
+import com.group24.chatapp.models.user.UserObject
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*

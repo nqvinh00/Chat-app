@@ -8,25 +8,26 @@
     android:layout_marginBottom="12dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/message_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/rounded_textplain"
         android:maxWidth="240dp"
         android:padding="16dp"
-        android:text="This is my message sdew fasd asda dasfasd "
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        android:text="This is my messageas row abc xyz ablied"
+        app:layout_constraintStart_toEndOf="@+id/message_image_view"
+        app:layout_constraintTop_toTopOf="@+id/message_image_view" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/message_image_view"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:contentDescription="TODO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
