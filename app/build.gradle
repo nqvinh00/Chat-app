@@ -3,6 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
 }
+
+androidExtensions {
+    experimental = true
+}
+
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -53,4 +58,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.xwray:groupie:2.9.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
