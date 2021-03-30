@@ -22,11 +22,13 @@ class ChatLogActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
+    var user: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
         message_recycler_view.adapter = adapter
-        val user = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
+        user = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
         supportActionBar?.title = user?.username
 
         listenForMessages()
@@ -46,9 +48,10 @@ class ChatLogActivity : AppCompatActivity() {
                 if (message != null) {
                     Log.d(CHAT_LOG_TAG, message.text)
                     if (message.fromId == FirebaseAuth.getInstance().uid) {
-                        adapter.add(MessageFrom(message.text))
+                        val currentUser = LatestMessages.currentUser ?: return
+                        adapter.add(MessageFrom(message.text, currentUser!!))
                     } else {
-                        adapter.add(MessageTo(message.text))
+                        adapter.add(MessageTo(message.text, user!!))
                     }
                 }
             }

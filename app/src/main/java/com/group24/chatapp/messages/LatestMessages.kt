@@ -7,16 +7,43 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.group24.chatapp.R
 import com.group24.chatapp.RegisterActivity
+import com.group24.chatapp.models.user.User
 
 class LatestMessages : AppCompatActivity() {
+
+    companion object {
+        var currentUser: User? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_latest_messages)
 
+        fetchCurrentUser()
+
         verifyLogin()
+    }
+
+    // Tim va nap nguoi dung hien tai
+    private fun fetchCurrentUser() {
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user/$uid")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(p0 : DataSnapshot) {
+                currentUser = p0.getValue(User::class.java)
+            }
+
+            override fun onCancelled(p0 : DatabaseError) {
+            }
+        })
     }
 
     private fun verifyLogin() {
