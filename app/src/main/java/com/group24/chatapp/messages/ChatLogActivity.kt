@@ -21,7 +21,6 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     val adapter = GroupAdapter<GroupieViewHolder>()
-
     var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,16 +39,19 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
-        val reference = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = user?.uid
+        val reference = FirebaseDatabase.getInstance().getReference("/message-between/$fromId/$toId")
 
         reference.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val message = snapshot.getValue(ChatMessage::class.java)
                 if (message != null) {
                     Log.d(CHAT_LOG_TAG, message.text)
+                    Log.d(CHAT_LOG_TAG, message.fromId + " " + FirebaseAuth.getInstance().uid)
                     if (message.fromId == FirebaseAuth.getInstance().uid) {
                         val currentUser = LatestMessages.currentUser ?: return
-                        adapter.add(MessageFrom(message.text, currentUser!!))
+                        adapter.add(MessageFrom(message.text, currentUser))
                     } else {
                         adapter.add(MessageTo(message.text, user!!))
                     }
@@ -57,7 +59,7 @@ class ChatLogActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -65,11 +67,11 @@ class ChatLogActivity : AppCompatActivity() {
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
+
             }
         })
     }
@@ -82,11 +84,16 @@ class ChatLogActivity : AppCompatActivity() {
         val toId = user!!.uid
 
         if (fromId == null) return
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val reference = FirebaseDatabase.getInstance().getReference("/message-between/$fromId/$toId").push()
+        val toReference = FirebaseDatabase.getInstance().getReference("/message-between/$toId/$fromId").push()
         val chatMessage = ChatMessage(reference.key!!, message, fromId, toId, System.currentTimeMillis() / 1000)
         reference.setValue(chatMessage)
                 .addOnSuccessListener {
                     Log.d(CHAT_LOG_TAG, "Save message to firebase ${reference.key}")
+                    message_input.text.clear()
+                    message_recycler_view.scrollToPosition(adapter.itemCount - 1)
         }
+
+        toReference.setValue(chatMessage)
     }
 }

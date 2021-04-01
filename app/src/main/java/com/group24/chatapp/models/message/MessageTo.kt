@@ -7,13 +7,12 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.message_to.view.*
 
-class MessageTo(private val message: String, val user: User) : Item<GroupieViewHolder>() {
+class MessageTo(private val message: String, private val user: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.message_to.text = message
 
-        // Them anh dai dien vao chatlog
         val uri = user.profileImageURL
-        val targetImageView = viewHolder.itemView.message_image_view
+        val targetImageView = viewHolder.itemView.message_image_to
         Picasso.get().load(uri).into(targetImageView)
     }
 

@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_new_message.*
 class NewMessage : AppCompatActivity() {
     companion object {
         const val NEW_MESSAGE_TAG = "NewMessage"
-        const val USERS_STORAGE_PATH = "/users"
         const val ACTION_BAR_TITLE = "Select User"
         const val USER_KEY = "USER_KEY"
     }
@@ -32,7 +31,7 @@ class NewMessage : AppCompatActivity() {
     }
 
     private fun usersList() {
-        val reference = FirebaseDatabase.getInstance().getReference(USERS_STORAGE_PATH)
+        val reference = FirebaseDatabase.getInstance().getReference("/users")
         reference.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
@@ -50,11 +49,9 @@ class NewMessage : AppCompatActivity() {
 
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserObject
-
                     val intent = Intent(view.context, ChatLogActivity::class.java)
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
-
                     finish()
                 }
 

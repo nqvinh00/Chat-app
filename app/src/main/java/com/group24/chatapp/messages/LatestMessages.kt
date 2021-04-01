@@ -3,6 +3,7 @@ package com.group24.chatapp.messages
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -11,34 +12,39 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import com.group24.chatapp.R
 import com.group24.chatapp.RegisterActivity
+import com.group24.chatapp.models.message.LatestMessageObject
 import com.group24.chatapp.models.user.User
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.activity_latest_messages.*
 
 class LatestMessages : AppCompatActivity() {
 
     companion object {
         var currentUser: User? = null
+        private val adapter = GroupAdapter<GroupieViewHolder>()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
-
+        latest_messages_recyler_view.adapter = adapter
         fetchCurrentUser()
-
         verifyLogin()
+        adapter.add(LatestMessageObject())
+        adapter.add(LatestMessageObject())
+        adapter.add(LatestMessageObject())
     }
 
-    // Tim va nap nguoi dung hien tai
+    // fetch the current user
     private fun fetchCurrentUser() {
         val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/user/$uid")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-
-            override fun onDataChange(p0 : DataSnapshot) {
-                currentUser = p0.getValue(User::class.java)
+        val reference = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot : DataSnapshot) {
+                currentUser = snapshot.getValue(User::class.java)
             }
 
             override fun onCancelled(p0 : DatabaseError) {
