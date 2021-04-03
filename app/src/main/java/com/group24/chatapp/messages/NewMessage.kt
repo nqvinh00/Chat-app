@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -42,7 +43,7 @@ class NewMessage : AppCompatActivity() {
                 snapshot.children.forEach { it ->
                     Log.d(NEW_MESSAGE_TAG, it.toString())
                     val user = it.getValue(User::class.java)
-                    if (user != null) {
+                    if (user != null && user.uid != FirebaseAuth.getInstance().uid) {
                         adapter.add(UserObject(user))
                     }
                 }

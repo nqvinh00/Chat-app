@@ -32,7 +32,7 @@ class LatestMessages : AppCompatActivity() {
         latest_messages_recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         // set item click listener on adapter
-        adapter.setOnItemClickListener { item, view ->
+        adapter.setOnItemClickListener { item, _ ->
             val intent = Intent(this, ChatLogActivity::class.java)
             val userItem = item as LatestMessageObject
             intent.putExtra(USER_KEY, userItem.chatUser)
