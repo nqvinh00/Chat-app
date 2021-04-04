@@ -18,7 +18,6 @@ import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     var selectedPhotoURI: Uri?= null
-    
     companion object {
         const val REGISTER_TAG = "RegisterActivity"
     }

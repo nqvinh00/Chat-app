@@ -12,7 +12,7 @@ class MessageTo(private val message: String, private val user: User) : Item<Grou
         viewHolder.itemView.message_to.text = message
 
         val uri = user.profileImageURL
-        val targetImageView = viewHolder.itemView.message_image_to
+        val targetImageView = viewHolder.itemView.ava_message_to
         Picasso.get().load(uri).into(targetImageView)
     }
 

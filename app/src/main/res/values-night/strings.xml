@@ -13,4 +13,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="new_message">New Message</string>
     <string name="enter_message">Enter Message</string>
+    <string name="send_image">Send image</string>
+    <string name="send_message">Send message</string>
+    <string name="image_view">image_view</string>
 </resources>

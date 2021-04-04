@@ -1,5 +1,6 @@
 package com.group24.chatapp.messages
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,8 +21,8 @@ class ChatLogActivity : AppCompatActivity() {
         const val CHAT_LOG_TAG = "ChatLog"
     }
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
-    var user: User? = null
+    private var adapter = GroupAdapter<GroupieViewHolder>()
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,13 @@ class ChatLogActivity : AppCompatActivity() {
             Log.d(CHAT_LOG_TAG, "Send message")
             sendMessage()
         }
+
+        choose_image.setOnClickListener {
+            Log.d(CHAT_LOG_TAG, "Choose image")
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, 0)
+        }
     }
 
     private fun listenForMessages() {
@@ -46,7 +54,7 @@ class ChatLogActivity : AppCompatActivity() {
         reference.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val message = snapshot.getValue(ChatMessage::class.java)
-                Log.i("ChatLogActivity", "addChildEventListener called")
+                Log.i(CHAT_LOG_TAG, "addChildEventListener called")
                 if (message != null) {
                     Log.d(CHAT_LOG_TAG, message.text)
                     Log.d(CHAT_LOG_TAG, message.fromId + " " + FirebaseAuth.getInstance().uid)
@@ -77,7 +85,6 @@ class ChatLogActivity : AppCompatActivity() {
         })
     }
 
-
     private fun sendMessage() {
         val message = message_input.text.toString()
         val fromId = FirebaseAuth.getInstance().uid
@@ -104,3 +111,4 @@ class ChatLogActivity : AppCompatActivity() {
         latestMessageToRef.setValue(chatMessage)
     }
 }
+
