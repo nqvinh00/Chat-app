@@ -18,5 +18,6 @@
     <string name="send_image">Send image</string>
     <string name="send_message">Send message</string>
     <string name="image_view">image_view</string>
+    <string name="image_message">Image message</string>
     <!-- Strings used for fragments for navigation -->
 </resources>
