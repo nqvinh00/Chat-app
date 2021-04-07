@@ -39,9 +39,9 @@ class LatestMessages : AppCompatActivity() {
             startActivity(intent)
         }
 
-        listenForLatestMessages()
-        fetchCurrentUser()
         verifyLogin()
+        fetchCurrentUser()
+        listenForLatestMessages()
     }
 
     val latestMessageList = HashMap<String, ChatMessage>()
