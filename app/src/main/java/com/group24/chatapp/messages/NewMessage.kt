@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_new_message.*
 class NewMessage : AppCompatActivity() {
     companion object {
         const val NEW_MESSAGE_TAG = "NewMessage"
-        const val USERS_STORAGE_PATH = "/users"
         const val ACTION_BAR_TITLE = "Select User"
         const val USER_KEY = "USER_KEY"
     }
@@ -32,7 +32,7 @@ class NewMessage : AppCompatActivity() {
     }
 
     private fun usersList() {
-        val reference = FirebaseDatabase.getInstance().getReference(USERS_STORAGE_PATH)
+        val reference = FirebaseDatabase.getInstance().getReference("/users")
         reference.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
@@ -43,18 +43,16 @@ class NewMessage : AppCompatActivity() {
                 snapshot.children.forEach { it ->
                     Log.d(NEW_MESSAGE_TAG, it.toString())
                     val user = it.getValue(User::class.java)
-                    if (user != null) {
+                    if (user != null && user.uid != FirebaseAuth.getInstance().uid) {
                         adapter.add(UserObject(user))
                     }
                 }
 
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserObject
-
                     val intent = Intent(view.context, ChatLogActivity::class.java)
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
-
                     finish()
                 }
 
