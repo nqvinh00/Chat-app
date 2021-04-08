@@ -22,5 +22,10 @@
     <string name="who_receive_call">Who receive call</string>
     <string name="who_make_call">Who make call</string>
     <string name="stop">Stop</string>
+    <string name="menu_button">Menu button</string>
+    <string name="group_chat_button">Group chat button</string>
+    <string name="voice_call_button">Voice call button</string>
+    <string name="video_call_button">Video call button</string>
+    <string name="new_message_button">New message button</string>
     <!-- Strings used for fragments for navigation -->
 </resources>

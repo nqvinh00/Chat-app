@@ -1,9 +1,11 @@
 package com.group24.chatapp.messages
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +27,8 @@ class LatestMessages : AppCompatActivity() {
         private val adapter = GroupAdapter<GroupieViewHolder>()
     }
 
+    private var isOpen: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
@@ -38,10 +42,35 @@ class LatestMessages : AppCompatActivity() {
             intent.putExtra(USER_KEY, userItem.chatUser)
             startActivity(intent)
         }
+        
+        menu_button.setOnClickListener {
+            if (isOpen) {
+                menuDisplay(View.VISIBLE)
+                isOpen = false
+                menuAction()
+            } else {
+                menuDisplay(View.INVISIBLE)
+                isOpen = true
+            }
+        }
 
         verifyLogin()
         fetchCurrentUser()
         listenForLatestMessages()
+    }
+
+    private fun menuAction() {
+        new_message_button.setOnClickListener {
+            val intent = Intent(this, NewMessage::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun menuDisplay(visibility : Int) {
+        new_message_button.visibility = visibility
+        group_chat_button.visibility = visibility
+        video_call_button.visibility = visibility
+        voice_call_button.visibility = visibility
     }
 
     val latestMessageList = HashMap<String, ChatMessage>()
@@ -113,11 +142,6 @@ class LatestMessages : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.new_message_menu -> {
-                val intent = Intent(this, NewMessage::class.java)
-                startActivity(intent)
-            }
-
             R.id.sign_out -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, RegisterActivity::class.java)
