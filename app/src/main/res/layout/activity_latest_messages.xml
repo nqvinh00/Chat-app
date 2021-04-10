@@ -67,36 +67,4 @@
         app:rippleColor="#000000"
         app:srcCompat="@drawable/baseline_apps_36" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/voice_call_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:contentDescription="@string/voice_call_button"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:backgroundTint="#FFE082"
-        app:layout_constraintBottom_toTopOf="@+id/group_chat_button"
-        app:layout_constraintEnd_toEndOf="@+id/group_chat_button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/group_chat_button"
-        app:srcCompat="@drawable/baseline_call_24" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/video_call_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:contentDescription="@string/video_call_button"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:backgroundTint="#EF9A9A"
-        app:layout_constraintBottom_toTopOf="@+id/voice_call_button"
-        app:layout_constraintEnd_toEndOf="@+id/voice_call_button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/voice_call_button"
-        app:srcCompat="@drawable/baseline_videocam_24" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

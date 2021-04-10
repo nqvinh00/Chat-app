@@ -27,7 +27,7 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     var adapter = GroupAdapter<GroupieViewHolder>()
-    private var user: User? = null
+    var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,22 @@ class ChatLogActivity : AppCompatActivity() {
             startActivityForResult(intent, 0)
         }
 
+        video_call.setOnClickListener {
+            setupCall()
+        }
+    }
+
+    private fun setupCall() {
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = user?.uid
+        val channelName = UUID.randomUUID().toString()
+        val reference = FirebaseDatabase.getInstance().getReference("/video-call")
+        reference.child("$fromId-$toId").setValue(channelName)
+
+        val intent = Intent(this, VideoCall::class.java)
+        intent.putExtra("fromId", fromId)
+        intent.putExtra("toId", toId)
+        startActivity(intent)
     }
 
     private fun listenForMessages() {

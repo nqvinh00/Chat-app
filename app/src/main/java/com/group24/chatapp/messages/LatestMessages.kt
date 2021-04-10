@@ -1,6 +1,5 @@
 package com.group24.chatapp.messages
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -69,8 +68,6 @@ class LatestMessages : AppCompatActivity() {
     private fun menuDisplay(visibility : Int) {
         new_message_button.visibility = visibility
         group_chat_button.visibility = visibility
-        video_call_button.visibility = visibility
-        voice_call_button.visibility = visibility
     }
 
     val latestMessageList = HashMap<String, ChatMessage>()

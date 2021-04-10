@@ -11,7 +11,6 @@
         android:id="@+id/message_input"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_message"
@@ -21,15 +20,13 @@
         android:inputType="textMultiLine|textPersonName"
         android:paddingStart="5pt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/choose_image"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/send_message_button"
         tools:ignore="RtlSymmetry" />
 
     <ImageButton
         android:id="@+id/send_message_button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_button"
@@ -39,7 +36,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/choose_image"
         app:srcCompat="@android:drawable/ic_menu_send" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -56,15 +52,41 @@
 
     <ImageButton
         android:id="@+id/choose_image"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_button"
         android:contentDescription="@string/send_image"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send_message_button"
-        app:layout_constraintStart_toEndOf="@+id/message_input"
+        app:layout_constraintEnd_toStartOf="@+id/message_input"
+        app:layout_constraintStart_toEndOf="@+id/voice_call"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <ImageButton
+        android:id="@+id/voice_call"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_button"
+        android:contentDescription="@string/voice_call_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/choose_image"
+        app:layout_constraintStart_toEndOf="@+id/video_call"
+        app:srcCompat="@drawable/baseline_call_24" />
+
+    <ImageButton
+        android:id="@+id/video_call"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_button"
+        android:contentDescription="@string/video_call_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/voice_call"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_videocam_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
