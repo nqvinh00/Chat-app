@@ -22,6 +22,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatApp">
+        <activity android:name=".util.WhiteBoard">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".messages.ChatLogActivity" />
+        </activity>
         <activity android:name=".messages.VoiceCall">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

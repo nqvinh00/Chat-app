@@ -38,6 +38,7 @@ class VoiceCall : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.voice_call)
+        supportActionBar?.hide()
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)) {
             initAgoraEngineAndJoinChannel()
         }
@@ -48,7 +49,7 @@ class VoiceCall : AppCompatActivity() {
         joinChannel() // Tutorial Step 2
     }
 
-    fun checkSelfPermission(permission: String, requestCode: Int): Boolean {
+    private fun checkSelfPermission(permission: String, requestCode: Int): Boolean {
         Log.i(LOG_TAG, "checkSelfPermission $permission $requestCode")
         if (ContextCompat.checkSelfPermission(this,
                         permission)

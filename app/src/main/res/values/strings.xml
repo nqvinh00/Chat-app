@@ -29,5 +29,6 @@
     <string name="video_call_button">Video call button</string>
     <string name="new_message_button">New message button</string>
     <string name="end_call">End call</string>
+    <string name="white_board_activity">White board activity</string>
     <!-- Strings used for fragments for navigation -->
 </resources>

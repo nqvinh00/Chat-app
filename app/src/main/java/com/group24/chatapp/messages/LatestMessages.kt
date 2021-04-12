@@ -1,6 +1,7 @@
 package com.group24.chatapp.messages
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -26,8 +27,6 @@ class LatestMessages : AppCompatActivity() {
         private val adapter = GroupAdapter<GroupieViewHolder>()
     }
 
-    private var isOpen: Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
@@ -43,14 +42,8 @@ class LatestMessages : AppCompatActivity() {
         }
         
         menu_button.setOnClickListener {
-            if (isOpen) {
-                menuDisplay(View.VISIBLE)
-                isOpen = false
-                menuAction()
-            } else {
-                menuDisplay(View.INVISIBLE)
-                isOpen = true
-            }
+            menuDisplay(View.VISIBLE)
+            menuAction()
         }
 
         verifyLogin()
@@ -62,6 +55,7 @@ class LatestMessages : AppCompatActivity() {
         new_message_button.setOnClickListener {
             val intent = Intent(this, NewMessage::class.java)
             startActivity(intent)
+            menuDisplay(View.INVISIBLE)
         }
     }
 
