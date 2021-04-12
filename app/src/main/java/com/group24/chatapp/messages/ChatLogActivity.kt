@@ -51,21 +51,24 @@ class ChatLogActivity : AppCompatActivity() {
         }
 
         video_call.setOnClickListener {
-            setupCall()
+            setupCall("/video-call")
+            val intent = Intent(this, VideoCall::class.java)
+            startActivity(intent)
+        }
+
+        voice_call.setOnClickListener {
+            setupCall("/voice-call")
+            val intent = Intent(this, VoiceCall::class.java)
+            startActivity(intent)
         }
     }
 
-    private fun setupCall() {
+    private fun setupCall(path : String) {
         val fromId = FirebaseAuth.getInstance().uid
         val toId = user?.uid
         val channelName = UUID.randomUUID().toString()
-        val reference = FirebaseDatabase.getInstance().getReference("/video-call")
+        val reference = FirebaseDatabase.getInstance().getReference(path)
         reference.child("$fromId-$toId").setValue(channelName)
-
-        val intent = Intent(this, VideoCall::class.java)
-        intent.putExtra("fromId", fromId)
-        intent.putExtra("toId", toId)
-        startActivity(intent)
     }
 
     private fun listenForMessages() {

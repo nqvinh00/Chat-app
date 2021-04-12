@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.renderscript.Sampler
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.group24.chatapp.R
 
