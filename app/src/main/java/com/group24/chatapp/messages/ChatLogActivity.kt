@@ -2,20 +2,22 @@ package com.group24.chatapp.messages
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.storage.FirebaseStorage
 import com.group24.chatapp.R
 import com.group24.chatapp.models.message.*
 import com.group24.chatapp.models.user.User
+import com.group24.chatapp.util.WhiteBoard
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
@@ -24,15 +26,16 @@ import java.util.*
 class ChatLogActivity : AppCompatActivity() {
     companion object {
         const val CHAT_LOG_TAG = "ChatLog"
+        var user: User? = null
     }
 
     var adapter = GroupAdapter<GroupieViewHolder>()
-    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
         message_recycler_view.adapter = adapter
+        message_recycler_view.scrollToPosition(adapter.itemCount - 1)
         user = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
         supportActionBar?.title = user?.username
 
@@ -48,6 +51,48 @@ class ChatLogActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
+        }
+
+        util_menu.setOnClickListener {
+            menuDisplay(View.VISIBLE)
+            menuAction()
+        }
+    }
+
+    private fun setupCall(path : String) {
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = user?.uid
+        val channelName = UUID.randomUUID().toString()
+        val reference = FirebaseDatabase.getInstance().getReference(path)
+        reference.child("$fromId-$toId").setValue(channelName)
+    }
+
+    private fun menuDisplay(visibility : Int) {
+        voice_call.visibility = visibility
+        video_call.visibility = visibility
+        whiteboard.visibility = visibility
+    }
+
+    private fun menuAction() {
+        video_call.setOnClickListener {
+            setupCall("/video-call")
+            val intent = Intent(this, VideoCall::class.java)
+            startActivity(intent)
+            menuDisplay(View.INVISIBLE)
+        }
+
+        voice_call.setOnClickListener {
+            setupCall("/voice-call")
+            val intent = Intent(this, VoiceCall::class.java)
+            startActivity(intent)
+            menuDisplay(View.INVISIBLE)
+
+        }
+
+        whiteboard.setOnClickListener {
+            val intent = Intent(this, WhiteBoard::class.java)
+            startActivityForResult(intent, 0)
+            menuDisplay(View.INVISIBLE)
         }
 
     }
@@ -83,6 +128,7 @@ class ChatLogActivity : AppCompatActivity() {
                         }
                     }
                 }
+                message_recycler_view.scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onCancelled(error: DatabaseError) {
