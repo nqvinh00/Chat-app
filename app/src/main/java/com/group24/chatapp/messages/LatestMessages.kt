@@ -1,7 +1,6 @@
 package com.group24.chatapp.messages
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -21,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_latest_messages.*
 class LatestMessages : AppCompatActivity() {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    var currentUser = MenuActivity.currentUser
     var target : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,26 +50,8 @@ class LatestMessages : AppCompatActivity() {
             }
             startActivity(intent)
         }
-        
-        menu_button.setOnClickListener {
-            menuDisplay(View.VISIBLE)
-            menuAction()
-        }
 
         listenForLatestMessages()
-    }
-
-    private fun menuAction() {
-        new_message_button.setOnClickListener {
-            val intent = Intent(this, NewMessage::class.java)
-            startActivity(intent)
-            menuDisplay(View.INVISIBLE)
-        }
-    }
-
-    private fun menuDisplay(visibility : Int) {
-        new_message_button.visibility = visibility
-        group_chat_button.visibility = visibility
     }
 
     val latestMessageList = HashMap<String, ChatMessage>()

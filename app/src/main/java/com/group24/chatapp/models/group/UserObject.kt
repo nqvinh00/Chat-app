@@ -7,7 +7,6 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.group_users_list.view.*
-import kotlinx.android.synthetic.main.users_list.view.*
 import kotlinx.android.synthetic.main.users_list.view.image_profile_new_message
 import kotlinx.android.synthetic.main.users_list.view.username_new_message
 

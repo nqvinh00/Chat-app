@@ -2,7 +2,6 @@ package com.group24.chatapp.messages
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -36,11 +35,11 @@ class ChatLogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat_log)
         message_recycler_view.adapter = adapter
         message_recycler_view.scrollToPosition(adapter.itemCount - 1)
-        user = intent.getParcelableExtra<User>(NewMessage.USER_KEY)
+        user = intent.getParcelableExtra(NewMessage.USER_KEY)
         if (user != null) {
             supportActionBar?.title = user?.username
         } else {
-            group = intent.getParcelableExtra<Group>(NewGroup.GROUP_KEY)
+            group = intent.getParcelableExtra(NewGroup.GROUP_KEY)
             supportActionBar?.title = group?.groupName
         }
 
@@ -65,43 +64,6 @@ class ChatLogActivity : AppCompatActivity() {
             } else {
                 menuDisplay(View.INVISIBLE)
             }
-        }
-    }
-
-    private fun setupCall(path : String) {
-        val fromId = FirebaseAuth.getInstance().uid
-        val toId = user?.uid
-        val channelName = UUID.randomUUID().toString()
-        val reference = FirebaseDatabase.getInstance().getReference(path)
-        reference.child("$fromId-$toId").setValue(channelName)
-    }
-
-    private fun menuDisplay(visibility : Int) {
-        voice_call.visibility = visibility
-        video_call.visibility = visibility
-        whiteboard.visibility = visibility
-    }
-
-    private fun menuAction() {
-        video_call.setOnClickListener {
-            setupCall("/video-call")
-            val intent = Intent(this, VideoCall::class.java)
-            startActivity(intent)
-            menuDisplay(View.INVISIBLE)
-        }
-
-        voice_call.setOnClickListener {
-            setupCall("/voice-call")
-            val intent = Intent(this, VoiceCall::class.java)
-            startActivity(intent)
-            menuDisplay(View.INVISIBLE)
-
-        }
-
-        whiteboard.setOnClickListener {
-            val intent = Intent(this, WhiteBoard::class.java)
-            startActivityForResult(intent, 0)
-            menuDisplay(View.INVISIBLE)
         }
     }
 
