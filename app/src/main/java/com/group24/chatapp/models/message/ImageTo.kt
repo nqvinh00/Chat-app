@@ -7,7 +7,7 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.image_to.view.*
 
-class ImageTo(private val path: String, private val toUser: User, private val fromId: String) : Item<GroupieViewHolder>() {
+class ImageTo(private val path: String, private val toUser: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val targetImageMessage = viewHolder.itemView.image_message_to
         Picasso.get().load(path).into(targetImageMessage)

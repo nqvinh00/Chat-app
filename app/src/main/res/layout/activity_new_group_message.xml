@@ -4,36 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".messages.LatestMessages">
+    tools:context=".messages.NewMessage">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/latest_messages_recycler_view"
+        android:id="@+id/new_group_message_recycler_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:civ_border_width="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/new_message_button"
+        android:id="@+id/group_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
-        android:contentDescription="@string/new_message_button"
-        android:focusable="true"
-        android:visibility="visible"
-        app:backgroundTint="#64B5F6"
-        app:layout_constraintBottom_toBottomOf="@+id/latest_messages_recycler_view"
-        app:layout_constraintEnd_toEndOf="@+id/latest_messages_recycler_view"
-        app:srcCompat="@drawable/baseline_add_24" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/new_group_message_recycler_view"
+        app:layout_constraintEnd_toEndOf="@+id/new_group_message_recycler_view"
+        app:srcCompat="@drawable/baseline_add_24"
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>
