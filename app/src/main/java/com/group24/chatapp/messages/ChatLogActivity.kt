@@ -2,6 +2,7 @@ package com.group24.chatapp.messages
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -64,7 +65,43 @@ class ChatLogActivity : AppCompatActivity() {
             } else {
                 menuDisplay(View.INVISIBLE)
             }
+        }
+    }
 
+    private fun setupCall(path : String) {
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = user?.uid
+        val channelName = UUID.randomUUID().toString()
+        val reference = FirebaseDatabase.getInstance().getReference(path)
+        reference.child("$fromId-$toId").setValue(channelName)
+    }
+
+    private fun menuDisplay(visibility : Int) {
+        voice_call.visibility = visibility
+        video_call.visibility = visibility
+        whiteboard.visibility = visibility
+    }
+
+    private fun menuAction() {
+        video_call.setOnClickListener {
+            setupCall("/video-call")
+            val intent = Intent(this, VideoCall::class.java)
+            startActivity(intent)
+            menuDisplay(View.INVISIBLE)
+        }
+
+        voice_call.setOnClickListener {
+            setupCall("/voice-call")
+            val intent = Intent(this, VoiceCall::class.java)
+            startActivity(intent)
+            menuDisplay(View.INVISIBLE)
+
+        }
+
+        whiteboard.setOnClickListener {
+            val intent = Intent(this, WhiteBoard::class.java)
+            startActivityForResult(intent, 0)
+            menuDisplay(View.INVISIBLE)
         }
     }
 
