@@ -60,7 +60,7 @@ class MenuActivity : AppCompatActivity() {
 
     // fetch the current user
     private fun fetchCurrentUser() {
-        val uid = FirebaseAuth.getInstance().uid
+        val uid = FirebaseAuth.getInstance().uid ?: return
         val reference = FirebaseDatabase.getInstance().getReference("/users/$uid")
         reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot : DataSnapshot) {
