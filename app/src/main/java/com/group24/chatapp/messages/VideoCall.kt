@@ -16,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.database.*
 import com.group24.chatapp.R
-
 import io.agora.rtc.IRtcEngineEventHandler
 import io.agora.rtc.RtcEngine
 import io.agora.rtc.video.VideoCanvas

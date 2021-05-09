@@ -41,7 +41,7 @@ class LoginActivity: AppCompatActivity() {
 
                 Log.d(LOGIN_TAG, "Login successfully ${it.result?.user?.uid}")
 
-                val intent = Intent(this, LatestMessages::class.java)
+                val intent = Intent(this, MenuActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

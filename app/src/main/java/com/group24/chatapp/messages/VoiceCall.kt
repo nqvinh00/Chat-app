@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.speech.tts.Voice
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
