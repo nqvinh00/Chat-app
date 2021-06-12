@@ -98,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     Log.d(REGISTER_TAG, "Save user to database successfully")
 
-                    val intent = Intent(this, LatestMessages::class.java)
+                    val intent = Intent(this, MenuActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
