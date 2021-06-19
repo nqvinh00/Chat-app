@@ -11,6 +11,7 @@ import android.os.Environment
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,6 +23,7 @@ import com.group24.chatapp.messages.ChatLogActivity
 import com.group24.chatapp.models.message.ImageMessage
 import com.group24.chatapp.models.whiteboard.PaintView
 import java.io.File
+import java.nio.file.Paths
 import java.util.*
 
 class WhiteBoard : AppCompatActivity() {
@@ -56,7 +58,7 @@ class WhiteBoard : AppCompatActivity() {
         val drawable =paintView!!.background
         drawable?.draw(canvas)
         paintView!!.draw(canvas)
-        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath
+        val path = filesDir
         val uuid = UUID.randomUUID().toString()
         file = File(path, "$uuid.png")
         file!!.writeBitmap(bitmap, Bitmap.CompressFormat.PNG, 85)
